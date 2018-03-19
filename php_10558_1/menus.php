@@ -1,29 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- * 
- * FUNCAO nomeDaFuncao ( conjunto_de_variaveis ) : TIPO_RETORNO
- *    VAR
- *       // declarações de variáveis * 
- *    INICIO
- *       // comandos
- * 
- *       retorne valor_de_retorno
- * FIMFUNCAO
- * 
- * 
- * 
- * PROCEDIMENTO nomeDoProcedimento( conjunto_de_variaveis )
- *    VAR
- *       // declarações de variáveis * 
- *    INICIO
- *       // comandos
- * FIMPROCEDIMENTO
- */
-
 function buildMenu($sId, $sClass, array $acsvItens) {
 
    $htmMenu = "<div id=\"div$sId\" class=\"$sClass\"><ul id=\"ul$sId\">";
