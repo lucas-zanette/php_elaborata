@@ -15,13 +15,63 @@ and open the template in the editor.
 
    <pre>
       $asMarcas = [ "Honda", "Renault", "Ford", "Chevrolet", "Fiat" ];
-      <!--echo "<p>$asMarcas[1]</p>"; -->
+      echo "&lt;p&gt; $asMarcas[1] &lt;/p&gt;";
+
       <strong>Resultado: </strong>
    </pre>
 
    <?php
-   $asMarcas = [ "Honda", "Renault", "Ford", "Chevrolet", "Fiat"];
-   echo "<p>$asMarcas[1]</p>";
+      
+      $asMarcas = [ "Honda", "Renault", "Ford", "Chevrolet", "Fiat" ];
+      echo "<p> $asMarcas[1] </p>";
+      
+   ?>
+   
+   
+   <pre>
+      <p>Para imprimirmos na tela todos os elementos precisamos de um <i> laço de repetição </i> </p>
+      <p>laço <i>for</i> tradicional:
+      $iCount = count( $asMarcas );
+      for ($i=0; $i<$iCount; $i++){
+         echo "&lt;p&gt;$asMarcas[$i]&lt;/p&gt;";
+      }
+
+      <strong>Resultado: </strong>
+   </pre>
+   
+   <?php
+   $iCount = count($asMarcas);
+   for ($i = 0; $i < $iCount; $i++) {
+      echo "<p>$asMarcas[$i]</p>";
+   }
    ?>
 
+   <pre>
+         <p>laço <i>for</i> para <i>arrays</i> (foreach):
+         foreach ( $asMarcas as $sItem ) {
+            echo "&lt;p&gt;;$sItem&lt;/p&gt;
+         }
+
+         <strong>Resultado</strong>
+   </pre>
+
+   <?php
+   foreach ($asMarcas as $sItem) {
+      echo "<p>$sItem</p>";
+   }
+   ?>
+
+   <pre>
+         <p>laço <i>foreach</i> com acesso aos índices:
+         foreach ( $asMarcas as $iIndex => $sItem ) {
+            echo "[$iIndex]: &lt;p&gt;;$sItem&lt;/p&gt";
+         }
+         <strong>Resultado</strong>
+   </pre>
+
+   <?php
+   foreach ($asMarcas as $iIndex => $sItem) {
+      echo "<p>[$iIndex]: $sItem</p>";
+   }
+   ?>
 </html>

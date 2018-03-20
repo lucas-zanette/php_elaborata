@@ -1,26 +1,40 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+  $htmResult = "<pre>";
+
+  $htmResult .= '<h3>SUPERGLOBAL $_GET</h3>';
+  $htmResult .= print_r($_GET, true);
+
+  $htmResult .= "<br /><hr />";
+
+  $htmResult .= '<h3>SUPERGLOBAL $_POST</h3>';
+  $htmResult .= print_r($_POST, true);
+
+  $htmResult .= "<br /><hr />";
+
+  $htmResult .= '<h3>SUPERGLOBAL $_REQUEST</h3>';
+  $htmResult .= print_r($_REQUEST, true);
+
+  $htmResult .= "</pre>";
+
+  echo $htmResult;
  */
 
-$htmResult = "<pre>";
+function nunLogin($sLogin, $sPassword) {
 
-$htmResult .= '<h3>SUPERGLOBAL $_GET</h3>';
-$htmResult .= print_r($_GET, true);
+   if ($sLogin === "lgz" && $sPassword === "123") {
+      return 1;
+   }
+   return 0; //login falhou
+}
 
-$htmResult .= "<br /><hr />";
+$sLogin        = $_POST["txtLoginName"];
+$pwdPassword   = $_POST["pwdLoginPassword"];
 
-$htmResult .= '<h3>SUPERGLOBAL $_POST</h3>';
-$htmResult .= print_r($_POST, true);
-
-$htmResult .= "<br /><hr />";
-
-$htmResult .= '<h3>SUPERGLOBAL $_REQUEST</h3>';
-$htmResult .= print_r($_REQUEST, true);
-
-$htmResult .= "</pre>";
-
-echo $htmResult;
+if ( runLogin ( $txtLoginName, $pwdLoginPassword)) {
+   
+}
+else {
+   
+}
