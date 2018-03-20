@@ -45,6 +45,7 @@ function buildMainMenu() {
 function buildLeftMenu() {
    $acsvLeftItens = [
        "PHP Info;phpinfo.php;_blank",
+       "Testes;testes.php;_blank",
        "Referência 1;https://www.w3schools.com\;_blank",
        "Referência 2;https://php.net\;_blank",
        "Pesquisar;https://www.google.com\;_blank",
