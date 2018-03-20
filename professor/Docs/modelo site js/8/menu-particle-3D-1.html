@@ -1,0 +1,225 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+
+
+<title>menu 3D - interactive DHTML</title>
+<meta name="Author" content="Gerard Ferrandez at http://www.dhteumeuleu.com">
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="imagetoolbar" content="no">
+<style type="text/css">
+	html {
+		overflow: hidden;
+	}
+	body {
+		position: absolute;
+		margin: 0px;
+		padding: 0px;
+		background: #222;
+		width: 100%;
+		height: 100%;
+	}
+	#screen {
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		width: 100%;
+		height: 100%;
+		background: #000;
+	}
+	#screen .plo {
+		position: absolute;
+		font-size: 1px;
+		cursor: pointer;
+		font-family: arial;
+		font-weight: bold;
+		white-space: nowrap;
+		font-size: 10px;
+		text-align: center;
+	}
+	#screen span {
+		position: relative;
+		top: 3px;
+		font-family: verdana;
+		font-weight: bold;
+		font-size: 2em;
+	}
+	
+</style>
+
+<script type="text/javascript">
+// =============================================================
+// script written by Gerard Ferrandez - September, 2009
+// http://www.dhteumeuleu.com
+// use under CC-BY-NC license
+// =============================================================
+
+
+var tm = function () {
+	/* ---- private vars ---- */
+	var O = [];
+	var xm = 0;
+	var ym = 0;
+	var scr, cx, cy, sx, sy, nx, ny, nw, nh;
+	var tx = 0;
+	var ty = 0;
+	var perspective = 200;
+	var nbp = 20;
+	var m3D = true;
+	////////////////////////////////////////////////////////////////////////////
+	/* --- events --- */
+	var addEvent = function  (o, e, f) {
+		if (window.addEventListener) o.addEventListener(e, f, false);
+		else if (window.attachEvent) r = o.attachEvent('on' + e, f);
+	}
+	/* --- resize --- */
+	var resize = function () {
+		nw = scr.offsetWidth * .5;
+		nh = scr.offsetHeight * .5;
+		var o = scr;
+		for (nx = 0, ny = 0; o != null; o = o.offsetParent) {
+			nx += o.offsetLeft;
+			ny += o.offsetTop;
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////
+	/* --- init script --- */
+	var init = function () {
+		for (var i = 0; i < nbp; i++) {
+			var o = {};
+			/* --- HTML elements --- */
+			o.plo = document.createElement('div');
+			o.plo.className = 'plo';
+			scr.appendChild(o.plo);
+			var txt = document.createElement('div');
+			txt.className = 'plo';
+			txt.innerHTML = 'Menu ' + i;
+			o.plo.appendChild(txt);
+			o.bul = document.createElement('span');
+			o.bul.innerHTML = "&bull;";
+			txt.insertBefore(o.bul, txt.firstChild);	
+			o.plo.txt = txt;
+			/* --- variables --- */	
+			o.x = 0;
+			o.y = 0;
+			o.z = 0;
+			o.dx = Math.random() - .5;
+			o.dy = Math.random() - .5;
+			o.dz = Math.random() - .5;
+			/* ---- CSS3 Transform ---- */
+			if ('MozTransform' in document.body.style) {
+				/* ---- firefox ---- */
+				o.plo.css3Transform = function (x, y, s) {
+					this.style.MozTransform = "translate(" + x + "px," + y + "px) scale(" + s + ")";
+				}
+			} else if ('webkitTransform' in document.body.style) {
+				/* ---- webkit (safari / google chrome) ---- */
+				o.plo.css3Transform = function (x, y, s) {
+					this.style.webkitTransform = "translate(" + x + "px," + y + "px) scale(" + s + ")";
+				}
+			} else if (scr.style.zoom) {
+				/* ---- IE style.zoom ---- */
+				o.plo.css3Transform = function (x, y, s) {
+					this.style.left = x + 'px';
+					this.style.top = y + 'px';
+					this.txt.style.zoom = s;
+				}
+			} else {
+				/* ---- others ---- */
+				o.plo.css3Transform = function (x, y, s) {
+					this.style.left = x + 'px';
+					this.style.top = y + 'px';
+					this.txt.style.fontSize = Math.round(s * 10) + "px";
+				}	
+			}
+			/* ---- 3D to 2D transform ---- */
+			o.transform = function () {
+				/* --- target coordinates --- */
+				this.x += (this.dx - this.x) * .05;
+				this.y += (this.dy - this.y) * .05;
+				this.z += (this.dz - this.z) * .05;
+				/* --- scaling --- */
+				var x = this.x * nh;
+				var y = this.y * nh;
+				var z = this.z * nh;
+				/* --- trigo --- */
+				var pz = z * cy - x * sy;
+				var px = z * sy + x * cy;
+				var py = y * cx - pz * sx;
+				pz = y * sx + pz * cx;
+				z = 1 / (pz / perspective + 1);
+				/* --- rendering --- */        			
+				this.plo.css3Transform(Math.round(px * z + nw), Math.round(py * z + nh), (Math.max(1, z * nh * .05) * .1));
+				var c = Math.round( z * 256);
+				this.plo.style.zIndex = c;
+				this.plo.style.color = 'rgb('.concat((c),',',(c),',',(c),')');
+				this.bul.style.color = 'rgb('.concat(Math.round(c * .6),',',Math.round(c * .4),',',Math.round(c * .1),')');
+			}
+			O.push(o);
+		}
+	}
+	////////////////////////////////////////////////////////////////////////////
+	/* --- main loop --- */
+	var run = function () {
+		/* ---- mouse ---- */
+		var s = m3D ? 20 : 100;
+    	tx += ((xm - nx - nw) - tx) / s;
+    	ty += ((ym - ny - nh) - ty) / s;
+		/* ---- angles ---- */
+		cx = Math.cos(ty * .005);
+		sx = Math.sin(ty * .005);
+		cy = Math.cos(tx * .005);
+		sy = Math.sin(tx * .005);
+		/* ---- loop ---- */
+		for (var i = 0, o; o = O[i]; i++)
+			o.transform();
+	}
+	/* --- 3D or 2D mode --- */
+	var transition = function () {
+		m3D = !m3D;
+		for (var i = 0, o; o = O[i]; i++) {
+			if (!m3D) {
+				o.dx = -.5 + (i - i % 5) * .06;
+				o.dy = -.4 + (i % 5) * .2;
+				o.dz = 0;
+			} else {
+				o.dx = Math.random() - .5;
+				o.dy = Math.random() - .5;
+				o.dz = Math.random() - .5;
+			}
+		}
+	}
+	return {
+		////////////////////////////////////////////////////////////////////////////
+		/* ==== public functions ==== */
+		init : function () {
+			/* ---- init script ---- */
+			scr = document.getElementById('screen');
+			addEvent(document, 'mousemove', function (e) {
+				if (window.event) e = window.event;
+				xm = e.clientX;
+				ym = e.clientY;
+			});
+			resize();
+			addEvent(window, 'resize', resize);
+			addEvent(document, 'click', transition);
+			init();
+			resize();
+			setInterval(run, 32);
+		}
+	}
+}();
+
+/* ==== start script ==== */
+onload = function() { 
+	tm.init();
+}
+
+</script>
+</head><body>
+
+<div id="screen" style="">
+
+<div style="-moz-transform: translate(480px, 331px) scale(0.812667); z-index: 137; color: rgb(137, 137, 137);" class="plo"><div class="plo"><span style="color: rgb(82, 55, 14);">•</span>Menu 0</div></div><div style="-moz-transform: translate(476px, 355px) scale(0.935463); z-index: 157; color: rgb(157, 157, 157);" class="plo"><div class="plo"><span style="color: rgb(94, 63, 16);">•</span>Menu 1</div></div><div style="-moz-transform: translate(468px, 385px) scale(1.08651); z-index: 183; color: rgb(183, 183, 183);" class="plo"><div class="plo"><span style="color: rgb(110, 73, 18);">•</span>Menu 2</div></div><div style="-moz-transform: translate(461px, 432px) scale(1.33316); z-index: 224; color: rgb(224, 224, 224);" class="plo"><div class="plo"><span style="color: rgb(134, 90, 22);">•</span>Menu 3</div></div><div style="-moz-transform: translate(442px, 499px) scale(1.69975); z-index: 286; color: rgb(255, 255, 255);" class="plo"><div class="plo"><span style="color: rgb(172, 114, 29);">•</span>Menu 4</div></div><div style="-moz-transform: translate(499px, 293px) scale(0.915145); z-index: 154; color: rgb(154, 154, 154);" class="plo"><div class="plo"><span style="color: rgb(92, 62, 15);">•</span>Menu 5</div></div><div style="-moz-transform: translate(493px, 314px) scale(1.10343); z-index: 186; color: rgb(186, 186, 186);" class="plo"><div class="plo"><span style="color: rgb(112, 74, 19);">•</span>Menu 6</div></div><div style="-moz-transform: translate(491px, 343px) scale(1.3398); z-index: 225; color: rgb(225, 225, 225);" class="plo"><div class="plo"><span style="color: rgb(135, 90, 23);">•</span>Menu 7</div></div><div style="-moz-transform: translate(488px, 390px) scale(1.68703); z-index: 284; color: rgb(255, 255, 255);" class="plo"><div class="plo"><span style="color: rgb(170, 114, 28);">•</span>Menu 8</div></div><div style="-moz-transform: translate(479px, 472px) scale(2.31316); z-index: 389; color: rgb(255, 255, 255);" class="plo"><div class="plo"><span style="color: rgb(233, 156, 39);">•</span>Menu 9</div></div><div style="-moz-transform: translate(521px, 242px) scale(1.08143); z-index: 182; color: rgb(182, 182, 182);" class="plo"><div class="plo"><span style="color: rgb(109, 73, 18);">•</span>Menu 10</div></div><div style="-moz-transform: translate(523px, 261px) scale(1.28966); z-index: 217; color: rgb(217, 217, 217);" class="plo"><div class="plo"><span style="color: rgb(130, 87, 22);">•</span>Menu 11</div></div><div style="-moz-transform: translate(528px, 281px) scale(1.66917); z-index: 281; color: rgb(255, 255, 255);" class="plo"><div class="plo"><span style="color: rgb(169, 112, 28);">•</span>Menu 12</div></div><div style="-moz-transform: translate(526px, 327px) scale(2.25885); z-index: 380; color: rgb(255, 255, 255);" class="plo"><div class="plo"><span style="color: rgb(228, 152, 38);">•</span>Menu 13</div></div><div style="-moz-transform: translate(550px, 409px) scale(3.565); z-index: 599; color: rgb(255, 255, 255);" class="plo"><div class="plo"><span style="color: rgb(255, 240, 60);">•</span>Menu 14</div></div><div style="-moz-transform: translate(554px, 173px) scale(1.27689); z-index: 215; color: rgb(215, 215, 215);" class="plo"><div class="plo"><span style="color: rgb(129, 86, 22);">•</span>Menu 15</div></div><div style="-moz-transform: translate(566px, 177px) scale(1.60086); z-index: 269; color: rgb(255, 255, 255);" class="plo"><div class="plo"><span style="color: rgb(161, 108, 27);">•</span>Menu 16</div></div><div style="-moz-transform: translate(587px, 170px) scale(2.22121); z-index: 373; color: rgb(255, 255, 255);" class="plo"><div class="plo"><span style="color: rgb(224, 149, 37);">•</span>Menu 17</div></div><div style="-moz-transform: translate(621px, 183px) scale(3.24514); z-index: 546; color: rgb(255, 255, 255);" class="plo"><div class="plo"><span style="color: rgb(255, 218, 55);">•</span>Menu 18</div></div><div style="-moz-transform: translate(731px, 202px) scale(7.61669); z-index: 1281; color: rgb(255, 255, 255);" class="plo"><div class="plo"><span style="color: rgb(255, 255, 128);">•</span>Menu 19</div></div></div>
+
+
+</body></html>

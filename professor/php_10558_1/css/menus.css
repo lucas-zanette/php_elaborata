@@ -1,0 +1,74 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15/03/2018, 19:37:10
+    Author     : aluno
+*/
+
+/* MENU HORIZONTAL */
+
+.hor-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.hor-menu li {
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+.hor-menu li:last-child {
+    border-right: none;
+}
+
+.hor-menu li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.hor-menu li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.hor-menu .active {
+    background-color: #4CAF50;
+}
+
+
+/* MENU VERTICAL */
+.ver-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+.ver-menu li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.ver-menu li a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.ver-menu li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}

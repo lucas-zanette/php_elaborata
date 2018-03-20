@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0045)http://www.dhteumeuleu.com/dhtml/M6-menu.html -->
+<HTML><HEAD><META http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<TITLE>M6 menu - Interactive DHTML art-demos</TITLE>
+<META name="Author" content="Gerard Ferrandez at http://www.dhteumeuleu.com">
+<STYLE type="text/css">
+	html {
+		overflow: hidden;
+	}
+	body {
+		background: #111;
+		width:100%;
+		height:100%;
+	}
+	#menu {
+		position:relative;
+		left:50%;
+		margin-left:-200px;
+		padding: 10px;
+		background: #000;
+		height: 300px;
+		width: 400px;
+	}
+	#menu a {
+		display:block;
+		text-decoration:none;
+		font-family: arial, helvetica, verdana, sans-serif;
+		white-space: nowrap;
+	}
+
+</STYLE>
+
+<SCRIPT type="text/javascript">
+// ===============================================================
+//                -------- M6 menu ------
+// script written by Gerard Ferrandez - Ge-1-doot - December 2005
+// http://www.dhteumeuleu.com
+// updated Feb 2010 - namespaced
+// ===============================================================
+//
+
+var M6 = function () {
+	var P,T;
+	var over = -1;
+	///////////////////////////////////
+	var fontSize = 38;
+	var lensFX = 1;
+	var num = true;
+	var color = "#FFF";
+	var selected = "#F80";
+	///////////////////////////////////
+	var zoom = function (s){
+		if(s!=over){
+			over = s;
+			var i = 0,o;
+			while (o = P[i]) {
+				o.style.fontSize=Math.floor(fontSize / (Math.abs(i - s) + lensFX) + 3)+"px";
+				o.style.color=(i==s)?selected:color;
+				i++;
+			}
+		}
+	}
+	////////////////////////////////////////////////////////////
+	var init = function () {
+		P = document.getElementById("menu").getElementsByTagName("a");
+		var i = 0,o;
+		while (o = P[i]) {
+			if(num){
+				x=i+".";
+				if(x.length<3)x="0"+x;
+				o.innerHTML = x+o.innerHTML;
+			}
+			o.style.width = "100%";
+			o.i = i;
+			o.onmouseover= function() {
+				zoom(this.i);
+			}
+			i++;
+		}
+		zoom(0);
+	}
+	////////////////////////////////////////////////////////////
+	return {
+		init : init
+	}
+}();
+
+
+onload = function(){
+	M6.init();
+}
+</SCRIPT>
+</HEAD><BODY>
+
+	<DIV id="menu">
+		<A href="http://del.icio.us/tag/scripting" style="width: 100%; font-size: 5px; color: rgb(255, 255, 255); ">00.adfhjjkjh</A>
+		<A href="http://del.icio.us/tag/javascript" style="width: 100%; font-size: 5px; color: rgb(255, 255, 255); ">01.javascript</A>
+		<A href="http://del.icio.us/tag/web" style="width: 100%; font-size: 5px; color: rgb(255, 255, 255); ">02.web</A>
+		<A href="http://del.icio.us/tag/dhtml" style="width: 100%; font-size: 5px; color: rgb(255, 255, 255); ">03.dhtml</A>
+		<A href="http://del.icio.us/tag/css" style="width: 100%; font-size: 5px; color: rgb(255, 255, 255); ">04.css</A>
+		<A href="http://del.icio.us/tag/ajax" style="width: 100%; font-size: 5px; color: rgb(255, 255, 255); ">05.ajax</A>
+		<A href="http://del.icio.us/tag/programming" style="width: 100%; font-size: 5px; color: rgb(255, 255, 255); ">06.programming</A>
+		<A href="http://del.icio.us/tag/design" style="width: 100%; font-size: 6px; color: rgb(255, 255, 255); ">07.design</A>
+		<A href="http://del.icio.us/tag/webdesign" style="width: 100%; font-size: 6px; color: rgb(255, 255, 255); ">08.webdesign</A>
+		<A href="http://del.icio.us/tag/html" style="width: 100%; font-size: 6px; color: rgb(255, 255, 255); ">09.html</A>
+		<A href="http://del.icio.us/tag/dom" style="width: 100%; font-size: 7px; color: rgb(255, 255, 255); ">10.dom</A>
+		<A href="http://del.icio.us/tag/webdev" style="width: 100%; font-size: 7px; color: rgb(255, 255, 255); ">11.webdev</A>
+		<A href="http://del.icio.us/tag/reference" style="width: 100%; font-size: 8px; color: rgb(255, 255, 255); ">12.reference</A>
+		<A href="http://del.icio.us/tag/tools" style="width: 100%; font-size: 9px; color: rgb(255, 255, 255); ">13.tools</A>
+		<A href="http://del.icio.us/tag/tutorial" style="width: 100%; font-size: 10px; color: rgb(255, 255, 255); ">14.tutorial</A>
+		<A href="http://del.icio.us/tag/xmlhttprequest" style="width: 100%; font-size: 12px; color: rgb(255, 255, 255); ">15.xmlhttprequest</A>
+		<A href="http://del.icio.us/tag/menu" style="width: 100%; font-size: 15px; color: rgb(255, 255, 255); ">16.menu</A>
+		<A href="http://del.icio.us/tag/xml" style="width: 100%; font-size: 22px; color: rgb(255, 255, 255); ">17.xml</A>
+		<A href="http://del.icio.us/tag/library" style="width: 100%; font-size: 41px; color: rgb(255, 136, 0); ">18.library</A>
+		<A href="http://del.icio.us/tag/development" style="width: 100%; font-size: 22px; color: rgb(255, 255, 255); ">19.development</A>
+
+	</DIV>
+	
+
+
+
+</BODY></HTML>

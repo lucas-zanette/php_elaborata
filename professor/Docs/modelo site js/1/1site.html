@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<title>parallaX - Interactive DHTML art-demos</title>
+<style type="text/css">
+	html {
+		overflow: hidden;
+	}
+	body {
+		margin: 0px;
+		padding: 0px;
+		background: #000;
+		width: 100%;
+		height: 100%;
+	}
+	#screen {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: 600px;
+		height: 400px;
+		margin-left: -300px;
+		margin-top: -200px;
+		overflow: hidden;
+		background: #000;
+		outline: #FFF solid 50px;
+	}
+	#screen img {
+		position: absolute;
+		left: -2000px;
+	}
+</style>
+
+<script type="text/javascript">
+
+var cx=0;
+var cy=0;
+var xm=0;
+var ym=0;
+var scr;
+var img;
+
+function parallax(rx, ry){
+	var pos = function(i, x, y) {
+		img[i].style.left = Math.round(x) + "px";
+		img[i].style.top  = Math.round(y) + "px";
+	}
+	pos(0,-20+(rx/2),-80+(ry*2)); 
+	pos(1,-40+(rx/2),20+(ry/2)); 
+	pos(2,-20+(rx/3),90+(ry/3)); 
+	pos(3,-20-(rx/2),130-(ry/2)); 
+	pos(4,0-rx,160-ry);
+	pos(5,240-rx*2,220-ry*2);
+}
+
+function mainloop(){
+	cx+=Math.round((xm-cx)/30);
+	cy+=Math.round((ym-cy)/10);
+	parallax(
+		-((scr.offsetWidth/2)-cx)/7,
+		-((scr.offsetHeight/2)-cy)/4.75
+	);
+	setTimeout(mainloop, 16);
+}
+
+onload = function(){
+	scr = document.getElementById("screen");
+	img = scr.getElementsByTagName("img");
+	parallax(0,0);
+	scr.onmousemove = function(e){
+		if (window.event) e = window.event;
+		xm = -scr.offsetLeft + (e.x || e.clientX);
+		ym = -scr.offsetTop + (e.y || e.clientY);
+	}
+	mainloop();
+}
+
+</script>
+</head><body>
+	<div id="screen">
+		<img style="left: -34px; top: -152px;" src="site/is05.jpg">
+		<img style="left: -54px; top: 2px;" src="site/is04.gif">
+		<img style="left: -29px; top: 78px;" src="site/is03.gif">
+		<img style="left: -6px; top: 148px;" src="site/is02.gif">
+		<img style="left: 27px; top: 196px;" src="site/is01.gif">
+		<img style="left: 295px; top: 292px;" src="site/is07.gif">
+	</div>
+</body></html>

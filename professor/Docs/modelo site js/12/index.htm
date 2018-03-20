@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>::: GABI Festas & Eventos :::</title>
+<meta name="Author" content="HIGHvolution http://www.temperto.com.br">
+<meta http-equiv="imagetoolbar" content="no">
+<style type="text/css">
+	html {
+		overflow: hidden;
+	}
+	body {
+		margin: 0px;
+		padding: 0px;
+		background: #222;
+		width: 100%;
+		height: 100%;
+		cursor: crosshair;
+	}
+	#screen {
+		position:absolute;
+		left: 0%;
+		top: 0%;
+		width: 100%;
+		height: 100%;
+		background: #000;
+		overflow: hidden;
+		cursor: crosshair;
+	}
+	#screen div {
+		position: absolute;
+	}
+	#screen span {
+		position: absolute;
+		background: #FFF;
+	}
+	#credit {
+		position: absolute;
+		color: #888;
+		left:50%;
+		top:48%;
+		margin-left: -107px;
+		margin-top: -125px;
+		z-index: 10000;
+	}
+	#rodape{
+	position: absolute;
+	color: #888;
+	font-family: arial;
+	font-size: 0.7em;
+	left:4%;
+	width: 99%;
+	text-align: left;
+	bottom: 2px;
+	z-index: 10000;
+	}
+	a {text-decoration: none;color:#fff;}
+	a:hover	{text-decoration: none;background:#ff8000;color:#fff;}
+	a:visited {text-decoration: none;color:#fff;}
+	a:visited:hover {text-decoration: none;background:#ff8000;color:#fff;}
+</style>
+
+<script type="text/javascript" src="pong/soundmanager.js"></script>
+
+<script type="text/javascript">
+
+var js = {
+	/* ===== crossbrowsers events ==== */
+	addEvent : function ( obj, type, fn ) {
+        if (obj.addEventListener) obj.addEventListener(type, fn, false);
+        else if (obj.attachEvent) obj.attachEvent('on' + type, function() { return fn.call(obj, window.event); });
+	},
+	/* ===== create JS Object ==== */
+	JSObject : function (att) {
+		var object = new Object();
+		for( var i in att) object[i] = att[i];
+		return object;
+	},
+	/* ===== append HTML Element ==== */
+	Append : function (tag, att, css) {
+		var object = document.createElement(tag);
+		for( var i in att) object[i] = att[i];
+		for( var i in css) object.style[i] = css[i];
+		this.appendChild(object);
+		object.append = js.Append;
+		return object;
+	},
+	/* ===== soundify a href links ==== */
+	soundifyLinks : function (container, over, clic){
+		if (container){
+			var l = container.getElementsByTagName('a');
+			for(var i = 0, n = l.length; i < n; i++){
+				this.addEvent(l[i], 'click', new Function("soundManager.play('"+clic+"');"));
+				this.addEvent(l[i], 'mouseover', new Function("soundManager.play('"+over+"');"));
+			}
+		}
+	}
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+var pong = function() {
+	/* ==== private variables and methods ==== */
+	///////////////////////
+	var acc = 1.01;
+	var speed = .025;
+	var angle = 15;
+	///////////////////////
+	var screen = new js.JSObject({left:0, width:0, height:0, scale_x:0, scale_y:0});
+	var ball = new js.JSObject({vx:0, vy:0, x:0, y:0, w:0});
+	var pad = [
+				new js.JSObject({y:0, s:1, ping:Ping, x:function(){return screen.scale_x * 2;}}),
+				new js.JSObject({y:0, s:-1, ping:Ping, x:function(){return screen.width - screen.scale_x * 3;}})
+	];
+	var time_p = new Date();
+	var score = [
+				new js.JSObject({s:0, d:-1}),
+				new js.JSObject({s:0, d:1}),
+				new js.JSObject({s:0, d:-1}),
+				new js.JSObject({s:0, d:1})
+	];
+	var sp;
+	var player = 0;
+
+	/* ===== window resize ==== */
+	function resize () {
+		/* ---- screen position/size ---- */
+		var o = screen.div;
+		for (screen.left = 0; o != null; o = o.offsetParent) screen.left += o.offsetLeft;
+		screen.width = screen.div.offsetWidth;
+		screen.height = screen.div.offsetHeight;
+		/* ---- scale pixels size ---- */
+		screen.scale_x = screen.width * .03;
+		screen.scale_y = screen.height * .25;
+		/* ---- ball and pads position/size ---- */
+		ball.style.width = ball.style.height = Math.round(screen.scale_x) + 'px';
+		pad[0].style.width = pad[1].style.width = Math.round(screen.scale_x) + 'px';
+		pad[0].style.height = pad[1].style.height = Math.round(screen.scale_y) + 'px';
+		pad[0].style.left = Math.round(screen.scale_x) + "px";
+		pad[1].style.left = Math.round(screen.width - screen.scale_x * 2) + "px";
+		/* ---- scores ---- */
+		for (var i = 0; i < 4; i++) {
+			var o = score[i].div.style;
+			o.width = o.height = Math.round(3 * screen.scale_x) + 'px';
+			o.left = Math.round(score[i].d > 0 ? screen.width * .5 + 2 * screen.scale_x : screen.width * .4 - 2 * screen.scale_x) + 'px';
+			o.top  = Math.round(i < 2 ? screen.scale_x : screen.height - 4 * screen.scale_x) + 'px';
+		}
+		/* ---- middle line ---- */
+		sp.style.width = Math.round(screen.scale_x) + 'px';
+		sp.style.left = Math.round(screen.width * .5 - screen.scale_x * .5) + 'px';
+		sp.innerHTML = "";
+		for (var i = 0; i < screen.height; i += screen.scale_x * 2)
+			sp.append('span', false, {
+				'top':Math.round(i) + 'px',
+				'width':Math.round(screen.scale_x) + 'px',
+				'height':Math.round(screen.scale_x) + 'px'
+			});
+	}
+	/* ---- bounce on pad ---- */
+	function Ping() {
+		if (ball.y + screen.scale_x > this.y && ball.y < this.y + screen.scale_y) {
+			/* ---- play sound first and return (mitigate latency) ---- */
+			if (!ball.sound) {
+				soundManager.play('pong1');
+				ball.sound = true;
+				ball.x = this.x();
+				return;
+			}
+			ball.sound = false;
+			/* ---- inc scores ---- */
+			score[2].s++;
+			chrono(score[2]);
+			if(score[2].s > score[3].s) {
+				score[3].s = score[2].s;
+				chrono(score[3]);
+			}
+			/* ---- reverse direction and accelerate ---- */
+			ball.vx = -ball.vx * acc;
+			ball.x = this.x();
+			/* ---- beware of the corners! ---- */
+			if (ball.y < this.y) ball.vy = ball.vx * -this.s * angle + Math.random() * .1;
+			else if (ball.y > this.y + screen.scale_y - screen.scale_x) ball.vy = ball.vx * this.s * angle  + Math.random() * .1;
+			/* ---- angle ---- */
+			else ball.vy = (Math.random() - .5) * ball.vx * angle;
+		}
+	}
+	/* ---- player won ---- */
+	function win(p) {
+		soundManager.play('pong3');
+		score[1 - p].s++;
+		chrono(score[1 - p]);
+		score[2].s = 0;
+		chrono(score[2]);
+		player = p;
+	}
+	/* ---- draw numeric digits ---- */
+	function chrono(score) {
+		var dir = score.d;
+		var txt = score.s + '';
+		score.div.innerHTML = '';
+		var a = [119,36,93,109,46,107,123,37,127,111];
+		var s = {1:[0,0,99,20],2:[0,0,33,45],4:[67,0,33,45],8:[0,40,100,20],16:[0,40,33,60],32:[67,40,33,60],64:[0,80,99,20]};
+		for (var i = 0, n = txt.length; i < n; i++) {
+			var c = txt.charAt(dir > 0 ? i : n - i - 1);
+			var p = a[c];
+			if (p) {
+				var d = score.div.append('div', false, {'height':'100%','width':'100%','left':(120 * i * dir) + '%'});
+				for (var j in s) {
+					var k = s[j];
+					if (p & j) d.append('span', false, {'left':k[0]+'%','top':k[1]+'%','width':k[2]+'%','height':k[3]+'%'});
+				}
+			}
+		}
+	}
+	/* ==== public methods ==== */
+	return {
+		/* ---- initialize script ---- */
+		init : function (container) {
+			/* ---- container ---- */
+			screen.div = document.getElementById(container);
+			if (!screen.div) return false;
+			screen.div.append = js.Append;
+			/* ---- pads and ball ---- */
+			pad[0].style = screen.div.append('span').style;
+			pad[1].style = screen.div.append('span').style;
+			ball.style = screen.div.append('span').style;
+			/* ---- scores ---- */
+			for (var i = 0; i < 4; i++) {
+				score[i].div = screen.div.append('div');
+				chrono(score[i]);
+			}
+			/* ---- center line ---- */
+			sp = screen.div.append('div', false, {'height':'100%'});
+			/* ---- do resize ---- */
+			resize();
+			/* ---- move pads ---- */
+			js.addEvent(screen.div, 'mousemove', function(e) {
+				e = e || window.event;
+				var y = screen.height - screen.scale_y;
+				var x = (e.clientX - screen.left) / screen.width;
+				pad[0].y = x * y;
+				pad[1].y = (1 - x) * y;
+				return false;
+			});
+			/* ---- launch ball ---- */
+			js.addEvent(screen.div, 'click', function(e) {
+				if (player >= 0) {
+					soundManager.play('pong1');
+					ball.vx = screen.scale_x * speed;
+					ball.vy = (Math.random() - .5) * screen.height * .01;
+					if (player == 1) ball.vx = -ball.vx;
+					player = -1;
+				}
+			});
+			/* ---- window resize event ---- */
+			js.addEvent(window, 'resize', resize);
+			/* ---- launch script ---- */
+			setInterval(pong.run, 16);
+		},
+		/* ==== main loop ==== */
+		run : function () {
+			/* ---- ball movment ---- */
+			var time = new Date();
+			var vx = ball.vx * (time - time_p);
+			if (player < 0) {
+				/* ---- playing ---- */
+				ball.x += vx;
+				ball.y += ball.vy;
+			} else {
+				/* ---- waiting ---- */
+				ball.x = pad[player].x();
+				ball.y = pad[player].y + screen.scale_y * .5 - screen.scale_x * .5;
+			}
+			time_p = time;
+			/* ---- test collisions ---- */
+			if (ball.vx > 0) {
+				/* ---- right player lost ---- */
+				if (ball.x > screen.width + screen.scale_x) win(1);
+				/* ---- bounce pad ---- */
+				else if (ball.x > screen.width - screen.scale_x * 3) pad[1].ping();
+			} else {
+				/* ---- left player lost ---- */
+				if (ball.x < -screen.scale_x) win(0);
+				/* ---- bounce pad ---- */
+				else if (ball.x < screen.scale_x * 2) pad[0].ping();
+			}
+			/* ---- collision top / bottom ---- */
+			if (ball.y > screen.height - screen.scale_x || ball.y < 0) {
+				soundManager.play('pong2');
+				ball.vy = -ball.vy;
+			}
+			/* ---- animate HTML elements ---- */
+			pad[0].style.top  = Math.round(pad[0].y) + 'px';
+			pad[1].style.top  = Math.round(pad[1].y) + 'px';
+			ball.style.left   = Math.round(ball.x) + 'px';
+			ball.style.top    = Math.round(ball.y) + 'px';
+		}
+	}
+}();
+/* ==== global onload ==== */
+onload = function () {
+	/* ---- init sounds ---- */
+	soundManagerInit();
+	js.soundifyLinks(document.body, 'link', 'select');
+	/* ---- init script ---- */
+	pong.init('screen');
+}
+
+</script>
+</head>
+
+<body>
+
+	<div id="screen"></div>
+
+	<div id="credit"><img src="logo.jpg" width="214" height="250"></div>
+    
+    <div id="rodape"><font size="-1">AGUARDE</font> grande novidade - Contato (19) 3388-7323 / 7804-2797- contato@gabifestaseventos.com.br</div>
+
+</body>
+</html>
