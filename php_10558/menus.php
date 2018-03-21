@@ -44,12 +44,13 @@ function buildMainMenu() {
 
 function buildLeftMenu() {
    $acsvLeftItens = [
-       "PHP Info;phpinfo.php;_blank",
-       "Testes;testes.php;_blank",
        "Referência 1;https://www.w3schools.com\;_blank",
        "Referência 2;https://php.net\;_blank",
+       "PHP Info;phpinfo.php;_blank",
        "Pesquisar;https://www.google.com\;_blank",
-       "Array;arrays.php;_blank"
+       "Testes;testes.php;_blank",
+       "Array;arrays.php;_blank",
+       "Exercícios;exercicios.php;_self"
    ];
 
    return buildMenu("divLeftMenu", "ver-menu", $acsvLeftItens);
@@ -63,3 +64,19 @@ function buildLeftMenu_arrays() {
 
    return buildMenu("divLeftMenu", "ver-menu", $acsvLeftItens);
 }
+
+function buildLeftMenuExercicios() {
+   $acsvLeftItens = [
+       "(L01) Exercicio1;exercicios/lista_01/formL01Ex01.php;ifrWorkspace",
+       "(L01) Exercicio2;exercicios/lista_01/formL01Ex02.php;ifrWorkspace",
+       "Exercicio2;https://php.net\;_blank",
+       "Exercicio3;phpinfo.php;_blank",
+       "Exercicio4;https://www.google.com\;_blank",
+       "Exercicio5;testes.php;_blank",
+       "Exercicio6;arrays.php;_blank",
+       "Exercicio7;exercicios.php;_self"
+   ];
+
+   return buildMenu("divLeftMenu", "ver-menu", $acsvLeftItens);
+}
+
