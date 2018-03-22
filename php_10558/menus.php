@@ -2,7 +2,7 @@
 
 function buildMenu($sId, $sClass, array $acsvItens) {
 
-   $htmMenu = "<div id=\"div$sId\" class=\"$sClass\"><ul id=\"ul$sId\">";
+   $htmMenu = "<div id=\"$sId\" class=\"$sClass\"><ul id=\"ul$sId\">";
 
    /*
     * PARA CADA $item_da_lista DE $lista_de_itens FAÇA
@@ -69,12 +69,9 @@ function buildLeftMenuExercicios() {
    $acsvLeftItens = [
        "(L01) Exercicio1;exercicios/lista_01/formL01Ex01.php;ifrWorkspace",
        "(L01) Exercicio2;exercicios/lista_01/formL01Ex02.php;ifrWorkspace",
-       "Exercicio2;https://php.net\;_blank",
-       "Exercicio3;phpinfo.php;_blank",
-       "Exercicio4;https://www.google.com\;_blank",
-       "Exercicio5;testes.php;_blank",
-       "Exercicio6;arrays.php;_blank",
-       "Exercicio7;exercicios.php;_self"
+       "(L01) Exercicio3;exercicios/lista_01/formL01Ex03.php;ifrWorkspace",
+       "(L01) Exercicio7;exercicios/lista_01/formL01Ex07.php;ifrWorkspace",
+       "(L01) Exercicio21;exercicios/lista_01/formL01Ex21.php;ifrWorkspace"
    ];
 
    return buildMenu("divLeftMenu", "ver-menu", $acsvLeftItens);

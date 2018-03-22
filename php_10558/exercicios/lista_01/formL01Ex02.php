@@ -9,13 +9,12 @@
             href="../../css/forms.css" />      
    </head>
    <body>
-      <h1>Lista de Exercícios 01 –  Seqüência Simples</h1>
-      <h2>Exercicio 01 - Lista 01 </h2>
-      <p>1) Uma P.A. (progressão aritmética) fica determinada pela sua razão (r) e pelo primeiro termo(a 1 ). <br />
-         Escreva um programa em PHP que seja capaz de determinar qualquer termo de uma P.A., dado a razão e o primeiro termo. <br />
-         <b>a<sub>n</sub> = a<sub>1</sub> + (n−1) * r</b><br /></p>
-
-
+      <h1>Lista de Exercícios 02 –  Seqüência Simples</h1>
+      <h2>Exercicio 02 - Lista 01 </h2>
+      <p>1) Uma P.G. (progressão geométrica) fica determinada pela sua razão (q) e pelo primeiro termo(a <sub>1</sub> ). <br />
+         Escreva um programa em PHP que seja capaz de determinar qualquer termo de uma P.G., dado a razão e o primeiro termo. <br />
+         <b>a<sub>n</sub> = a<sub>1</sub> * q <sup>(n-1)</sup> </b><br /></p>     
+         
       <form id="formL01Ex01"  
             method="GET">
 
@@ -65,7 +64,7 @@
               class="input-command-group">
 
             <input id="sbmCalcular" 
-                   name="smbCalcular" 
+                   name="sbmCalcular" 
                    type="submit" 
                    value="Calcular"
                    class="input-command"/>
@@ -80,23 +79,23 @@
 
       <pre>
          <?php
-         if (isset($_GET["smbCalcular"])) {
+         if (isset($_GET["sbmCalcular"])) {
 
 //          solucao sera feita aqui
-            $r = $_GET["nRazao"];
+            $q = $_GET["nRazao"];
             $a1 = $_GET["nA1"];
             $n = $_GET["nTermo"];
 
-            $an = $a1 + ( $n - 1 ) * $r;
+            $an = $a1 * pow( $q, $n-1 ) ;
 
             echo "<ul>";
-            echo "<li> r = $r</li>";
+            echo "<li> r = $q</li>";
             echo "<li>a<sub>1</sub> = $a1</li>";
             echo "<li>n = $n</li>";
             echo "</ul>";
 
             echo "<ul>";
-            echo "<li><p>Termo da P.A é = $an<p></li>";
+            echo "<li><p>Termo da P.G. é = $an<p></li>";
             echo "<ul>";
          }
          ?>

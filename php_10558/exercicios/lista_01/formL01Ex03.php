@@ -10,12 +10,10 @@
    </head>
    <body>
       <h1>Lista de Exercícios 01 –  Seqüência Simples</h1>
-      <h2>Exercicio 01 - Lista 01 </h2>
-      <p>1) Uma P.A. (progressão aritmética) fica determinada pela sua razão (r) e pelo primeiro termo(a 1 ). <br />
-         Escreva um programa em PHP que seja capaz de determinar qualquer termo de uma P.A., dado a razão e o primeiro termo. <br />
-         <b>a<sub>n</sub> = a<sub>1</sub> + (n−1) * r</b><br /></p>
-
-
+      <h2>Exercicio 03 - Lista 01 </h2>
+      <p>1) Dada a razão de uma P.A e um termo qualquer, k (a<sub>k</sub>. Escreva um programa em PHP que seja capaz de determinar qualquer outro termo, n, (a<sub>n</sub>)<br />
+         <b>a<sub>n</sub> = a<sub>k</sub> + (n-k) * r </b><br /></p>     
+         
       <form id="formL01Ex01"  
             method="GET">
 
@@ -29,34 +27,49 @@
                    name="nRazao" 
                    type="number"                    
                    required 
-                   placeholder="digite a razão da P.A"
+                   placeholder="digite a razão"
                    class="input-data">
             <br>
          </div>
 
-         <!--a1-->
+         <!--ak-->
          <div id="divA1" class="" >
-            <label id="lblA1"
-                   for="nA1"
-                   class="input-label">Termo (a<sub>n</sub>):</label>
-            <input id="nA1" 
-                   name="nA1" 
+            <label id="lblAk"
+                   for="nAk"
+                   class="input-label">k (a<sub>k</sub>):</label>
+            <input id="nAk" 
+                   name="nAk" 
                    type="number"                    
                    required 
-                   placeholder="digite o primeiro termo da P.A"
+                   placeholder="digite o k"
                    class="input-data">
             <br>
          </div>
+
+         <div id="divKe" class="" >
+            <label id="lblKe"
+                   for="nKe"
+                   class="input-label">k ésimo termo (a<sub>k</sub>):</label>
+            <input id="nKek" 
+                   name="nKe" 
+                   type="number"                    
+                   required 
+                   placeholder="digite o (ésimo) termo da P.A"
+                   class="input-data">
+            <br>
+         </div>
+
+         
 
          <div id="divAt" class="input-data-group" >
-            <label id="lblTermo"
-                   for="nTermo"
+            <label id="lblN"
+                   for="nN"
                    class="input-label">Termo (n):</label>
-            <input id="nTermo" 
-                   name="nTermo"
+            <input id="nN" 
+                   name="nN"
                    type="number"                    
                    required 
-                   placeholder="digite o número do termo a ser selecionado"
+                   placeholder="digite o número do termo a ser calculado"
                    class="input-data">
             <br>
          </div>
@@ -65,7 +78,7 @@
               class="input-command-group">
 
             <input id="sbmCalcular" 
-                   name="smbCalcular" 
+                   name="sbmCalcular" 
                    type="submit" 
                    value="Calcular"
                    class="input-command"/>
@@ -80,23 +93,25 @@
 
       <pre>
          <?php
-         if (isset($_GET["smbCalcular"])) {
+         if (isset($_GET["sbmCalcular"])) {
 
 //          solucao sera feita aqui
-            $r = $_GET["nRazao"];
-            $a1 = $_GET["nA1"];
-            $n = $_GET["nTermo"];
+            $q   = $_GET["nRazao"];
+            $nAk = $_GET["nAk"];
+            $nKe = $_GET["nKe"];
+            $n   = $_GET["nN"];
 
-            $an = $a1 + ( $n - 1 ) * $r;
+            $an = $nAk + ($n - $nKe) * $q;
 
             echo "<ul>";
-            echo "<li> r = $r</li>";
-            echo "<li>a<sub>1</sub> = $a1</li>";
+            echo "<li> r = $q</li>";
+            echo "<li>a<sub>k</sub> = $nAk</li>";
+            echo "<li>K esimo = $nKe</li>";
             echo "<li>n = $n</li>";
             echo "</ul>";
 
             echo "<ul>";
-            echo "<li><p>Termo da P.A é = $an<p></li>";
+            echo "<li><p>Termo da P.A. é = $an<p></li>";
             echo "<ul>";
          }
          ?>
