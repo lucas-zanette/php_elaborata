@@ -6,21 +6,23 @@
  * and open the template in the editor.
  */
 
-$htmResult = "<pre>";
+function runLogin( $sLogin, $sPassword ){
+   
+   if ( $sLogin === "" && $sPassword === "123" ){
+      return 1;
+   } // if ( $sLogin === "" && $sPassword === "123" ){
+   
+   return 0; // login falhou
+} // function runLogin( $sLogin, $sPassword ){
 
-$htmResult .= '<h3>SUPERGLOBAL $_GET</h3>';
-$htmResult .= print_r( $_GET, true );
 
-$htmResult .= "<br /><hr />";
 
-$htmResult .= '<h3>SUPERGLOBAL $_POST</h3>';
-$htmResult .= print_r( $_POST, true );
+$txtLoginName     = $_POST["txtLoginName"];
+$pwdLoginPassword = $_POST["pwdLoginPassword"];
 
-$htmResult .= "<br /><hr />";
-
-$htmResult .= '<h3>SUPERGLOBAL $_REQUEST</h3>';
-$htmResult .= print_r( $_REQUEST, true );
-
-$htmResult .= "</pre>";
-
-echo $htmResult;
+if ( runLogin( $txtLoginName, $pwdLoginPassword ) ){
+   
+}
+else{
+   
+}

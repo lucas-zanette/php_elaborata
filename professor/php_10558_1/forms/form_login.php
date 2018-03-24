@@ -15,7 +15,7 @@
    <form id="formLogin"
          class="input-form"
          action="proc_login.php"
-         method="GET" >
+         method="POST" >
       <div id="divLoginName"
            class="input-data-group">
          <label id="lblLoginName"

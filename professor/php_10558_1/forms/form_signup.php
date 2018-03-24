@@ -15,7 +15,7 @@
    <form id="formSignup"
          class="input-form"
          action="proc_signup.php"
-         method="GET" >
+         method="POST" >
       <div id="divSignupName"
            class="input-data-group">
          <label id="lblSignupName"

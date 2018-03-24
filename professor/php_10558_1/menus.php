@@ -76,10 +76,13 @@ function buildMainMenu(){
 function buildLeftMenu(){
             
    $acsvLeftItens = [
-       "Referência 1;https://www.w3schools.com\;_blank",
-       "Referência 2;https://php.net\;_blank",
+       "PHP Info;phpinfo.php;_blank",
+       "Testes;testes.php;_blank",
+       "W3Schools;https://www.w3schools.com\;_blank",
+       "php.net;https://php.net\;_blank",
        "Pesquisar;https://www.google.com\;_blank",
-       "Arrays;arrays.php;_self"
+       "Arrays;arrays.php;_self",
+       "Exercícios;exercices.php;_self"
    ];
 
    return buildMenu( "LeftMenu", "ver-menu", $acsvLeftItens );
@@ -93,7 +96,25 @@ function buildLeftMenu_arrays(){
             
    $acsvLeftItens = [
        "Arrays 1;arrays_1.php;ifrWorkspace",
-       "Arrays 2;arrays_2.php;ifrWorkspace"
+       "Arrays 2;arrays_2.php;ifrWorkspace",
+       "Arrays 3;arrays_3.php;ifrWorkspace"
+   ];
+
+   return buildMenu( "LeftMenu", "ver-menu", $acsvLeftItens );
+} // function buildLeftMenu_arrays(){
+
+/**
+ * 
+ * @return type
+ */
+function buildLeftMenu_exercices(){
+            
+   $acsvLeftItens = [
+       "Exercício 01 (L01);exercices/list_01/formL01Ex01.php;ifrWorkspace",
+       "Exercício 02 (L01);exercices/list_01/formL01Ex02.php;ifrWorkspace",
+       "Exercício 03 (L01);exercices/list_01/formL01Ex03.php;ifrWorkspace",
+       "Exercício 07 (L01);exercices/list_01/formL01Ex07.php;ifrWorkspace",
+       "Exercício 21 (L01);exercices/list_01/formL01Ex21.php;ifrWorkspace"
    ];
 
    return buildMenu( "LeftMenu", "ver-menu", $acsvLeftItens );

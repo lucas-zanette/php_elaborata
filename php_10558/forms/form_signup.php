@@ -14,10 +14,10 @@
       id="formCadastro"
       class=""
       action="proc_cadastro.php"
-      method="GET">
+      method="POST">
 
       <div id="divCadastroEmail">
-         <label id="lblCadastroLogin">Login:</label>
+         <label id="lblCadastroLogin">Nome de Login:</label>
          <input id="txtCadastroLogin"
                 name="lblCadastroLogin"
                 type="text"
@@ -28,7 +28,7 @@
                 <br>
       </div>
 
-      <label id="lblCadastroEmail">Email:</label>
+      <label id="lblCadastroEmail">e-mail:</label>
       <input id="txtCadastroEmail"
              name="lblCadastroEmail"
              type="text"
@@ -50,6 +50,19 @@
                 placeholder="digite sua senha"
                 <br>
       </div>
+
+      <div id="divCadastroRepSenha">
+         <label id="lblCadastroRepSenha">Confirmar senha:</label>
+         <input id="txtCadastroRepSenha"
+                name="lblCadastroRepSenha"
+                type="password"
+                maxlength="50"
+                size="50"
+                required
+                placeholder="confirme sua senha"
+                <br>
+      </div>
+
       <div id="rstCadastro">
          <input id="sbmCadastro" 
                 name="smbCadastro" 

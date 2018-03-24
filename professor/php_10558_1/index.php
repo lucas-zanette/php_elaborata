@@ -13,6 +13,11 @@ if ( isset( $_GET["load"] ) ){
    $iLoad = $_GET["load"];
 }
 
+$sStatus = "Pronto.";
+if ( isset( $_GET["msg"] ) ){
+   $sStatus = $_GET["msg"];
+}
+
 require_once "menus.php"
 ?>
 <html>
@@ -77,6 +82,10 @@ require_once "menus.php"
          </nav>
 
          <section id="sctWorkspace">
+            <div id="divStatus" 
+                 style="background-color:darkseagreen">
+               <span><?php echo $sStatus ?></span>
+            </div>
             <?php
                if ( $iLoad === "1" ){
                   require_once "./forms/form_login.php";

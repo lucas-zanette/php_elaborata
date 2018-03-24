@@ -18,25 +18,40 @@ do elemento que queremos acessar.</p>
       <p>Para criarmos um array em PHP podemos utilizar as seguintes formas:</p>
       <pre>
          $aiArrayDeInteiros = [ 1, 2, 3, 4 ];
-         
+
          print_r( $aiArrayDeInteiros );
-         
+
+         $aiArrayDeInteiros = [
+             2 => 1, 
+             4 => 2, 
+             6 => 3, 
+             8 => 4
+         ];
+
+         print_r( $aiArrayDeInteiros );
+
          $afArrayDeReais[] = 1.2;
          $afArrayDeReais[] = 2.2;
          $afArrayDeReais[] = 2.7;
          $afArrayDeReais[] = 3.1;
-         
+
          print_r( $afArrayDeReais );
-         
-         $aiArrayDeInteiros = [ 2 => 1, 4 => 2, 6 => 3, 8 => 4 ];
-         
-         print_r( $aiArrayDeInteiros );
-         
+
          $afArrayDeReais[1] = 1.2;
          $afArrayDeReais[3] = 2.2;
          $afArrayDeReais[5] = 2.7;
          $afArrayDeReais[7] = 3.1;
-         
+
+         print_r( $afArrayDeReais );
+
+         // [ index => valor ]
+         $afArrayDeReais = [
+             1 => 1.2,
+             3 => 2.2,
+             5 => 2.7,
+             7 => 3.1
+         ];
+
          print_r( $afArrayDeReais );
 
          <strong>Resultados:</strong>
@@ -45,33 +60,41 @@ do elemento que queremos acessar.</p>
          // put your code here
          //$aiArrayDeInteiros = array( 1, 2, 3, 4 ); // FORMA ANTIGA
          $aiArrayDeInteiros = [ 1, 2, 3, 4 ];
-         
+
          print_r( $aiArrayDeInteiros );
-         
+         $aiArrayDeInteiros = [
+             2 => 1, 
+             4 => 2, 
+             6 => 3, 
+             8 => 4
+         ];
+
+         print_r( $aiArrayDeInteiros );
+
          $afArrayDeReais[] = 1.2;
          $afArrayDeReais[] = 2.2;
          $afArrayDeReais[] = 2.7;
          $afArrayDeReais[] = 3.1;
-         
+
          print_r( $afArrayDeReais );
-         
-         $aiArrayDeInteiros = [ 2 => 1, 4 => 2, 6 => 3, 8 => 4 ];
-         
-         print_r( $aiArrayDeInteiros );
-         
+
          $afArrayDeReais[1] = 1.2;
          $afArrayDeReais[3] = 2.2;
          $afArrayDeReais[5] = 2.7;
          $afArrayDeReais[7] = 3.1;
-         
-         print_r( $afArrayDeReais );         
-      ?>         
-      </pre>
-      
-      <p>Para acessarmos um array e seus elementos podemos utilizar as seguintes formas:</p>
-      <pre>
-         
-      </pre>
+
+         print_r( $afArrayDeReais );
+
+         // [ index => valor ]
+         $afArrayDeReais = [
+             1 => 1.2,
+             3 => 2.2,
+             5 => 2.7,
+             7 => 3.1
+         ];
+
+         print_r( $afArrayDeReais );
+      ?>
       <?php
       // put your code here
       ?>
