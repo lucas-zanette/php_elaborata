@@ -14,12 +14,12 @@
       id="formLogin" 
       class="" 
       action="proc_login.php" 
-      method="GET">   
+      method="POST">   
 
       <div id="divLoginName">
          <label id="lblLoginName">Login:</label>
          <input id="txtLoginName" 
-                name="lblLoginName" 
+                name="txtLoginName" 
                 type="text" 
                 maxlength="30" 
                 required 

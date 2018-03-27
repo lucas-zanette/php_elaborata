@@ -1,5 +1,5 @@
 <?php
-
+// C:\wamp64\www\php_elaborata\php_10558\proc_login.php
 $txtLoginName     = $_POST["txtLoginName"];
 $pwdLoginPassword = $_POST["pwdLoginPassword"];
 
