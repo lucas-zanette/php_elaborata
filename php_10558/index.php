@@ -7,11 +7,15 @@ and open the template in the editor.
 <?php
 // put your code here
 $sTitle = "CURSO PHP - 10558";
-//$iLoad = $_GET["load"];
 
 $iLoad = 0;
 if (isset($_GET["load"])) {  //isset = está definido
    $iLoad = $_GET["load"];
+}
+
+$sStatus = "";
+if ( isset( $_GET["msg"] )) {
+   $sStatus = $_GET["msg"];
 }
 
 require_once "menus.php";
@@ -73,7 +77,12 @@ require_once "menus.php";
 
          <br />  
          <section id="sctWorkspace"> 
-            <br />  
+            <div id="divStatus"
+               style="background-color:darkseagreen">
+               <span><?php echo $sStatus ?></span>               
+            </div>
+
+            
             <?php
             if ($iLoad === "1") {
                require_once "forms/form_login.php";

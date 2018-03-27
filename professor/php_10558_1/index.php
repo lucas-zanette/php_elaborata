@@ -14,7 +14,7 @@ if ( isset( $_GET["load"] ) ){
 }
 
 $sStatus = "Pronto.";
-if ( isset( $_GET["msg"] ) ){
+if ( isset( $_GET["msg"] )) {
    $sStatus = $_GET["msg"];
 }
 
