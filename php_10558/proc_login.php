@@ -1,40 +1,34 @@
 <?php
 
-/*
-  $htmResult = "<pre>";
+$txtLoginName     = $_POST["txtLoginName"];
+$pwdLoginPassword = $_POST["pwdLoginPassword"];
 
-  $htmResult .= '<h3>SUPERGLOBAL $_GET</h3>';
-  $htmResult .= print_r($_GET, true);
-
-  $htmResult .= "<br /><hr />";
-
-  $htmResult .= '<h3>SUPERGLOBAL $_POST</h3>';
-  $htmResult .= print_r($_POST, true);
-
-  $htmResult .= "<br /><hr />";
-
-  $htmResult .= '<h3>SUPERGLOBAL $_REQUEST</h3>';
-  $htmResult .= print_r($_REQUEST, true);
-
-  $htmResult .= "</pre>";
-
-  echo $htmResult;
- */
-
-function nunLogin($sLogin, $sPassword) {
-
-   if ($sLogin === "lgz" && $sPassword === "123") {
-      return 1;
-   }
-   return 0; //login falhou
+$sResult = "";
+if (runLogin($txtLoginName, $pwdLoginPassword)) {
+   $sResult = "Login efetuado com sucesso.";
+} else{
+   $sResult = "Erro ao efetuar login!";
 }
 
-$sLogin        = $_POST["txtLoginName"];
-$pwdPassword   = $_POST["pwdLoginPassword"];
+header("Location: index.php?msg=$sResult");
+   
 
-if ( runLogin ( $txtLoginName, $pwdLoginPassword)) {
-   
-}
-else {
-   
-} //teste
+
+function runLogin( $sLogin, $sPassword ){
+   $asUsers = [];
+   if (file_exists("data/users.json") ) {
+      
+      $sFileContent = file_get_contents("data/users.json");
+      $asUsers = json_decode($sFileContent);
+      
+      if ( $asUsers != NULL ) {
+         foreach ( $asUsers as $oUser ) {
+            if ( $oUser->txtCadastroName  === $sLogin || 
+                 $oUser->emlCadastroEmail === $sPassword ) {
+               return 1;
+            }
+         }
+      } 
+      return 0;
+   }   
+}  //function runLogin

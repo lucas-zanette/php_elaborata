@@ -18,8 +18,8 @@
 
       <div id="divCadastroEmail">
          <label id="lblCadastroLogin">Nome de Login:</label>
-         <input id="txtCadastroLogin"
-                name="lblCadastroLogin"
+         <input id="txtCadastroName"
+                name="txtCadastroName"
                 type="text"
                 maxlength="50"
                 size="50"
@@ -29,8 +29,8 @@
       </div>
 
       <label id="lblCadastroEmail">e-mail:</label>
-      <input id="txtCadastroEmail"
-             name="lblCadastroEmail"
+      <input id="emlCadastroEmail"
+             name="emlCadastroEmail"
              type="text"
              maxlength="50"
              size="50"
@@ -41,8 +41,8 @@
 
       <div id="divCadastroSenha">
          <label id="lblCadastroSenha">Senha:</label>
-         <input id="txtCadastroSenha"
-                name="lblCadastroSenha"
+         <input id="pwdCadastroPassword"
+                name="pwdCadastroPassword"
                 type="password"
                 maxlength="50"
                 size="50"
@@ -53,8 +53,8 @@
 
       <div id="divCadastroRepSenha">
          <label id="lblCadastroRepSenha">Confirmar senha:</label>
-         <input id="txtCadastroRepSenha"
-                name="lblCadastroRepSenha"
+         <input id="pwdCadastroConfPassword"
+                name="pwdCadastroConfPassword"
                 type="password"
                 maxlength="50"
                 size="50"
@@ -65,7 +65,7 @@
 
       <div id="rstCadastro">
          <input id="sbmCadastro" 
-                name="smbCadastro" 
+                name="sbmCadastro" 
                 type="submit" 
                 value="Salvar"/>
 
