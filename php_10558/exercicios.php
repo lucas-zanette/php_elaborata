@@ -5,6 +5,12 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->   
 <?php
+session_start();
+$bLogged = false;
+if ( isset( $_SESSION["bLogged"] ) && $_SESSION["bLogged"] ) {
+   $bLogged = true;
+}
+
 require_once "menus.php"
 ?>
 

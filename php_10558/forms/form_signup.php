@@ -14,7 +14,7 @@
       id="formCadastro"
       class=""
       action="proc_cadastro.php"
-      method="POST">
+      method="GET">
 
       <div id="divCadastroEmail">
          <label id="lblCadastroLogin">Nome de Login:</label>

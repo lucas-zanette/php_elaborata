@@ -40,7 +40,7 @@
       
       <div id="rstLogin">
          <input id="sbmLogin" 
-                name="smbLogin" 
+                name="sbmLogin" 
                 type="submit" 
                 value="Entrar"/>
 
