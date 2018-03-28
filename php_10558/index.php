@@ -6,11 +6,19 @@ and open the template in the editor.
 -->   
 <?php
 // put your code here
+
+session_start();
+
 $sTitle = "CURSO PHP - 10558";
 
 $iLoad = 0;
 if (isset($_GET["load"])) {  //isset = está definido
    $iLoad = $_GET["load"];
+}
+
+$bLogged = false;
+if ( isset( $_SESSION["bLogged"] ) && $_SESSION["bLogged"] ) {
+   $bLogged = true;
 }
 
 $sStatus = "";
@@ -78,7 +86,7 @@ require_once "menus.php";
          <br />  
          <section id="sctWorkspace"> 
             <div id="divStatus"
-               style="background-color:darkseagreen">
+                 style="background-color:#45a049">
                <span><?php echo $sStatus ?></span>               
             </div>
 

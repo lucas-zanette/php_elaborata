@@ -32,13 +32,21 @@ function buildMenu($sId, $sClass, array $acsvItens) {
 // function buildMenu( $sId, $sClass, array $acsvItens ){
 
 function buildMainMenu() {
-   $acsvMainItens = [
-       "Home;index.php;_self",
-       "Login;index.php?load=1;_self",
-       "Cadastrar;index.php?load=2;_self",
-       "Contato;index.php?load=3;_self"
-   ];
-
+   Global $bLogged;
+   if ($bLogged) {
+      $acsvMainItens = [
+          "Home;index.php;_self",
+          "Contato;index.php?load=3;_self",
+          "Sair;proc_logout.php;_self"
+      ];
+   } else {
+      $acsvMainItens = [
+          "Home;index.php;_self",
+          "Login;index.php?load=1;_self",
+          "Cadastrar;index.php?load=2;_self",
+          "Contato;index.php?load=3;_self"
+      ];
+   }
    return buildMenu("divMainMenu", "hor-menu", $acsvMainItens);
 }
 
@@ -76,4 +84,3 @@ function buildLeftMenuExercicios() {
 
    return buildMenu("divLeftMenu", "ver-menu", $acsvLeftItens);
 }
-

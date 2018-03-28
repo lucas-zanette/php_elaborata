@@ -97,7 +97,7 @@ function cadastrarUsuario(){
 */
 
 $sResult = "ERRO: Acesso inválido!";
-if ( isset( $_POST["sbmCadastro"] ) ){
+if ( isset( $_GET["sbmCadastro"] ) ){
    
    // SALVAR NOVO USUÁRIO
    
