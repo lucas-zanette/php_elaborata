@@ -8,10 +8,10 @@ function buildMenu($sId, $sClass, array $acsvItens) {
     * PARA CADA $item_da_lista DE $lista_de_itens FAÇA
     *    // monte o item de menu
     * FIMPARA
-    * 
+    *
     * $lista_de_itens: $acsvItens
     * $item_da_lista:  $csvItem
-    * 
+    *
     */
    foreach ($acsvItens as $csvItem) {
 
@@ -23,7 +23,7 @@ function buildMenu($sId, $sClass, array $acsvItens) {
       $sTarget = $asItem[2];
 
       $htmMenu .= "<li><a href=\"$sHref\" target=\"$sTarget\">$sCaption</a></li>";
-   } // foreach ( $acsvItens as $csvItem ){   
+   } // foreach ( $acsvItens as $csvItem ){
 
    $htmMenu .= "</ul></div>";
    return $htmMenu;
@@ -51,16 +51,25 @@ function buildMainMenu() {
 }
 
 function buildLeftMenu() {
-   $acsvLeftItens = [
-       "Referência 1;https://www.w3schools.com\;_blank",
-       "Referência 2;https://php.net\;_blank",
-       "PHP Info;phpinfo.php;_blank",
-       "Pesquisar;https://www.google.com\;_blank",
-       "Testes;testes.php;_blank",
-       "Array;arrays.php;_blank",
-       "Exercícios;exercicios.php;_self"
-   ];
-
+   Global $bLogged;
+   if ($bLogged) {
+      $acsvLeftItens = [
+          "Referência html e CSS;https://www.w3schools.com\;_blank",
+          "Referência php;https://php.net\;_blank",
+          "Pesquisar;https://www.google.com\;_blank",
+          "Testes;testes.php;_blank",
+          "Array;arrays.php;_blank",
+          "Exercícios;exercicios.php;_self",
+          "Banco de dados;database.php;_self"
+      ];
+   } else {
+      $acsvLeftItens = [
+          "Referência html e CSS;https://www.w3schools.com\;_blank",
+          "Referência php;https://php.net\;_blank",
+          "Pesquisar;https://www.google.com\;_blank",
+          "Testes;testes.php;_blank",
+      ];
+   }
    return buildMenu("divLeftMenu", "ver-menu", $acsvLeftItens);
 }
 
@@ -80,6 +89,15 @@ function buildLeftMenuExercicios() {
        "(L01) Exercicio3;exercicios/lista_01/formL01Ex03.php;ifrWorkspace",
        "(L01) Exercicio7;exercicios/lista_01/formL01Ex07.php;ifrWorkspace",
        "(L01) Exercicio21;exercicios/lista_01/formL01Ex21.php;ifrWorkspace"
+   ];
+
+   return buildMenu("divLeftMenu", "ver-menu", $acsvLeftItens);
+}
+
+function buildLeftMenu_database() {
+   $acsvLeftItens = [
+       "Banco de dados 01;database_select.php;ifrWorkspace",
+       "Banco de dados 02;database_select_where.php;ifrWorkspace",
    ];
 
    return buildMenu("divLeftMenu", "ver-menu", $acsvLeftItens);
