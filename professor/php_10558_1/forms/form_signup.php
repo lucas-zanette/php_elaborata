@@ -41,6 +41,17 @@
                 placeholder="digite seu email"
                 class="input-data" />
       </div>
+      <div id="divSignupSite"
+           class="input-data-group">
+         <label id="lblSignupSite"
+                for="urlSignupSite"
+                class="input-label">Site:</label>
+         <input id="urlSignupSite"
+                name="urlSignupSite"
+                type="url"
+                placeholder="digite seu site"
+                class="input-data" />
+      </div>
       <div id="divSignupPassword"
            class="input-data-group">
          <label id="lblSignupPassword"

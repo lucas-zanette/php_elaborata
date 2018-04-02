@@ -21,17 +21,17 @@ require_once "menus.php"
    <head>
       <meta charset="UTF-8">
       <title></title>
-      
-       <link rel="stylesheet" 
-             type="text/css" 
+
+       <link rel="stylesheet"
+             type="text/css"
              href="css/style.css" />
-      
-       <link rel="stylesheet" 
-             type="text/css" 
+
+       <link rel="stylesheet"
+             type="text/css"
              href="css/menus.css" />
-      
-       <link rel="stylesheet" 
-             type="text/css" 
+
+       <link rel="stylesheet"
+             type="text/css"
              href="css/forms.css" />
       <?php
       // put your code here
@@ -50,7 +50,7 @@ require_once "menus.php"
 
          <nav id="navLeftMenu">
             <?php
-               echo buildLeftMenu_exercices();
+               echo buildLeftMenu_database();
             ?>
          </nav>
 
@@ -62,7 +62,7 @@ require_once "menus.php"
             ?>
          </section>
 
-         <footer id="ftrFooter">                
+         <footer id="ftrFooter">
          </footer>
       </div>
    </body>

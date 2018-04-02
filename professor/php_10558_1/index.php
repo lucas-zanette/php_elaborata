@@ -6,6 +6,7 @@ and open the template in the editor.
 -->
 <?php
 // put your code here
+
 $sTitle = "CURSO PHP - 10558";
 
 $iLoad = "0";
@@ -13,8 +14,15 @@ if ( isset( $_GET["load"] ) ){
    $iLoad = $_GET["load"];
 }
 
+$bLogged = false;
+session_start();
+if ( isset( $_SESSION["bLogged"] ) && 
+            $_SESSION["bLogged"] ){
+   $bLogged = true;
+}
+
 $sStatus = "Pronto.";
-if ( isset( $_GET["msg"] )) {
+if ( isset( $_GET["msg"] ) ){
    $sStatus = $_GET["msg"];
 }
 
