@@ -1,5 +1,6 @@
 BANCO DE DADOS
 ================
+phpmyadmin / usuario default: root sem senha
 
 NortWind - banco de dados de teste importado para o nosso projeto
 encontrado no wikipedia
@@ -10,20 +11,18 @@ ORIENTAÇÃO A OBJETOS
 
 Diferenças entre:
 
-procedural				orientação a objetos
-------------------			----------------------------------
-					objeto
+procedural							orientação a objetos
+----------							----------------------------------
+									objeto
 dados <---> funções = sepados		dados + funções = juntos estão dentro de um objeto
 							
 
 usuáros
 -------------
-atributos -> valores			{propriedades
-login, 					{métodos
-email, 					{+ os atributos
+atributos -> valores				{propriedades
+login, 								{métodos
+email, 								{+ os atributos
 senha									
-
-
 
 
 Como usar:
