@@ -60,7 +60,8 @@ function buildLeftMenu() {
           "Testes;testes.php;_blank",
           "Array;arrays.php;_blank",
           "Exercícios;exercicios.php;_self",
-          "Banco de dados;database.php;_self"
+          "Banco de dados;database.php;_self",
+          "OOP;oop.php;_self"
       ];
    } else {
       $acsvLeftItens = [

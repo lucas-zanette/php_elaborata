@@ -1,0 +1,39 @@
+BANCO DE DADOS
+================
+
+NortWind - banco de dados de teste importado para o nosso projeto
+encontrado no wikipedia
+
+
+ORIENTAÇÃO A OBJETOS
+======================
+
+Diferenças entre:
+
+procedural				orientação a objetos
+------------------			----------------------------------
+					objeto
+dados <---> funções = sepados		dados + funções = juntos estão dentro de um objeto
+							
+
+usuáros
+-------------
+atributos -> valores			{propriedades
+login, 					{métodos
+email, 					{+ os atributos
+senha									
+
+
+
+
+Como usar:
+									
+$object = new ClassName(...)
+
+$object -> propriedadeName    ===    não tem os parenteses é propriedade, substitui o ponto
+$object -> methodName(...)    ===    entre parenteses é um método
+								
+
+
+DOM
+https://tableless.com.br/tenha-o-dom/
