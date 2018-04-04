@@ -103,3 +103,12 @@ function buildLeftMenu_database() {
 
    return buildMenu("divLeftMenu", "ver-menu", $acsvLeftItens);
 }
+
+function buildLeftMenu_oop() {
+   $acsvLeftItens = [
+       "OOP 01;oop_01.php;ifrWorkspace",
+       "OOP 02;oop_02.php;ifrWorkspace",
+   ];
+
+   return buildMenu("divLeftMenu", "ver-menu", $acsvLeftItens);
+}
