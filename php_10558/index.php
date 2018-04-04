@@ -6,7 +6,7 @@ and open the template in the editor.
 <?php
 // put your code here
 
-session_start();
+@session_start();
 
 $sTitle = "CURSO PHP - 10558";
 
